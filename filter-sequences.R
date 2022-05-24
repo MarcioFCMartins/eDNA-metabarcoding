@@ -159,4 +159,3 @@ write.csv(
     filtered_output,
     file.path(opts$output, "0000-filtering-stats.csv")
 )
-

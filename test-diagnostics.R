@@ -1,7 +1,7 @@
 dim(seqtab)
 table(nchar(getSequences(seqtab)))
 
-
+hist(nchar(getSequences(seqtab)))
 
 getN <- function(x) sum(getUniques(x))
 track <- cbind(

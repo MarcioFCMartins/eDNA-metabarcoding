@@ -3,7 +3,7 @@
 # Date: 2022-05-30
 
 # Install and load required packages --------------------------------------
-packages <- c("BiocManager", "optparse", "dada2")
+packages <- c("BiocManager", "optparse", "dada2", "dplyr")
 
 installed_packages <- packages %in% rownames(installed.packages())
 # Try to install packages from CRAN
@@ -48,12 +48,10 @@ option_list <- list(
 opt_parser <- OptionParser(option_list = option_list)
 opts <- parse_args(opt_parser)
 
-# TEST, MOVE LATER --------------------------------------------------------
-seqtab <- read.csv(
-    opts$`data-directory`,
-    row.names = 1
+# Assign taxonomy
+seqtab <- readRDS(
+    opts$`data-directory`
 )
-
 
 tax <- assignTaxonomy(
     seqtab,
@@ -67,5 +65,12 @@ tax$sequence <- rownames(tax)
 seqtab_transposed <- data.frame(t(seqtab))
 seqtab_transposed$sequence <- rownames(seqtab_transposed)
 
-
 final <- left_join(seqtab_transposed, tax, by = "sequence")
+
+reference_db <- basename(opts$`reference-sequences`)
+reference_db <- sub("\\.dada2.*", "", reference_db)
+
+write.csv(
+    final,
+    file.path(opts$output, paste0("taxonomy-", reference_db, ".csv"))
+)

@@ -319,12 +319,22 @@ write.csv(
     file.path(opts$output, "02-sequence-table.csv")
 )
 
-seqtab_nochimera <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE)
+seqtab_nochimera <- removeBimeraDenovo(
+    seqtab, 
+    method="consensus", 
+    multithread=TRUE
+)
+
 write.csv(
     seqtab_nochimera,
     file.path(opts$output, "02-sequence-table-nochimeras.csv")
 )
 
+# Save the sequence table as RDS for further analysis in R
+saveRDS(
+    seqtab_nochimera,
+    file.path(opts$output, "02-sequence-table-nochimeras.rds")
+)
 
 # Export assortment of diagnostics ----------------------------------------
 

@@ -29,7 +29,7 @@ set.seed(123)
 # Read arguments ----------------------------------------------------------
 option_list <- list(
     make_option(
-        c("-d", "--data-directory"),
+        c("-d", "--sequence-table"),
         type = "character",
         help = "Path to the file containing your sequence table."
     ),
@@ -50,7 +50,7 @@ opts <- parse_args(opt_parser)
 
 # Assign taxonomy
 seqtab <- readRDS(
-    opts$`data-directory`
+    opts$`sequence-table`
 )
 
 tax <- assignTaxonomy(

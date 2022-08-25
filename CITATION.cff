@@ -1,0 +1,15 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Sedimentary DNA metabarcoding pipeline
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Marcio
+    family-names: Martins
+    email: mfcmartins@ualg.pt
+    affiliation: Centre of Marine Sciences
+    orcid: 'https://orcid.org/0000-0002-6969-2215'

@@ -48,7 +48,7 @@ option_list <- list(
 opt_parser <- OptionParser(option_list = option_list)
 opts <- parse_args(opt_parser)
 
-# Assign taxonomy
+# Assign taxonomy -----------------------------------------------------
 seqtab <- readRDS(
     opts$`sequence-table`
 )
@@ -68,8 +68,10 @@ seqtab_transposed$sequence <- rownames(seqtab_transposed)
 final <- left_join(seqtab_transposed, tax, by = "sequence")
 
 reference_db <- basename(opts$`reference-sequences`)
-reference_db <- sub("\\.dada2.*", "", reference_db)
+reference_db <- sub("\\.fa.*$", "", reference_db)
 
+
+dir.create(opts$output, recursive = TRUE)
 write.csv(
     final,
     file.path(opts$output, paste0("taxonomy-", reference_db, ".csv"))

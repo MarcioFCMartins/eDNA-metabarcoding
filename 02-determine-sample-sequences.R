@@ -254,18 +254,18 @@ rev_samples_vec <- rev_samples$output_file
 names(rev_samples_vec) <- rev_samples$sample
 
 message("Performing sequence inference.")
-# Learn forward error rates - custom error function to handle binning better
+# Learn forward error rates
 fwd_error <- learnErrors(
     fwd_samples_vec, 
-    errorEstimationFunction = loessErrfun_modified,
+    errorEstimationFunction = error_func,
     multithread=TRUE, 
     randomize = TRUE
 )
 
-# Learn reverse error rates  - custom error function to handle binning better
+# Learn reverse error rates
 rev_error <- learnErrors(
     rev_samples_vec,
-    errorEstimationFunction = loessErrfun_modified,
+    errorEstimationFunction = error_func,
     multithread=TRUE,
     randomize = TRUE
 )

@@ -102,8 +102,11 @@ if(length(files$forward[files$forward]) != length(files$forward[files$forward]))
 }
 
 # Prepare table with primer used per sample -------------------------------
-mapping <- read.delim(
-    file = opts$mapping
+mapping <- read.table(
+    file = opts$mapping,
+    row.names = NULL,
+    sep = "\t", 
+    dec = "."
 )
 names(mapping) <- c("sample", "barcode", "forward_primer", "barcode_name",
                     "reverse_primer", "projectname", "description")
